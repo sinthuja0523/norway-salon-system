@@ -1,0 +1,20 @@
+a.ctm_login{
+    background-color: white;
+    color:black;
+    margin-left:10px;
+    border:white
+}
+.ctm_appoint_container
+{
+    height:auto;
+    background-color: rgb(14, 14, 14);
+    color: white;
+    width: 100vw;
+}
+select.ctm_branch::placeholder{
+    display: flex;
+    align-items: center;
+}
+img.ctm_appoint_image{
+    background-size: cover;
+}
