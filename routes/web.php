@@ -6,8 +6,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TimeSlotController;
+
+
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\TimeSlotController;
 
 
 /*
@@ -67,18 +70,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/dailyReports',[AdminController::class,'dailyReportsView'])->name('dailyreports-new');
     Route::get('/weekly-reports',[AdminController::class,'weeklyReportsView'])->name('weeklyreports-new');
     Route::get('/monthly-reports',[AdminController::class,'monthlyReportsView'])->name('monthlyreports-new');
-    Route::get('/branches',[AdminController::class,'branchesView'])->name('branches-new');
     Route::get('/time-slots',[AdminController::class,'TimeSlotsView'])->name('timeslots-new');
 
     Route::post('/approve',[AdminController::class,'approveAppointment']);
     Route::post('/decline', [AdminController::class, 'declineAppointment']);
 
-    // Admin - services routes
+    // Admin - Services routes
     Route::get('/services',[ServiceController::class,'index'])->name('services.view');
     Route::post('/service-add', [ServiceController::class, 'storeService'])->name('services.store');
     Route::get('/service-edit/{id}', [ServiceController::class, 'editService'])->name('services.edit');
     Route::post('/service-update/{id}', [ServiceController::class, 'updateService'])->name('services.update');
     Route::delete('/service-delete/{id}', [ServiceController::class, 'deleleService']);
+
+    // Admin - Branch routes
+    Route::get('/branches',[BranchController::class,'index'])->name('branches.view');
+    Route::post('/branch-add', [BranchController::class, 'storeBranch'])->name('branches.store');
+    Route::get('/branch-edit/{id}', [BranchController::class, 'editBranch'])->name('branches.edit');
+    Route::post('/branch-update/{id}', [BranchController::class, 'updateBranch'])->name('branches.update');
+    Route::delete('/branch-delete/{id}', [BranchController::class, 'deleleBranch']);
+
+        // Admin - Time slots routes
+        Route::get('/time-slots',[TimeSlotController::class,'index'])->name('time.view');
+        Route::post('/time-add', [TimeSlotController::class, 'storeTime'])->name('time.store');
+        Route::post('/time-update', [TimeSlotController::class, 'updateTime'])->name('time.update');
+        Route::delete('/time-delete/{id}', [TimeSlotController::class, 'deleleTime']);
 });
 
 require __DIR__.'/auth.php';

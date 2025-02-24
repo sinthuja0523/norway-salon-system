@@ -46,7 +46,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="/branches">
                 <i class="bi bi-question-circle"></i>
-                <span>Branch</span>
+                <span>Branches</span>
             </a>
         </li>
         <li class="nav-item">

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('time_slots', function (Blueprint $table) {
             $table->id();
-            $table->String('day');
-            $table->integer('is_active');
-
+            $table->time('time')->nullable();
+            $table->integer('is_active')->default(1)->nullable();
             $table->timestamps();
         });
     }

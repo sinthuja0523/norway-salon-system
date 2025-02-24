@@ -7,46 +7,48 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Time Slots</h5> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Add Time-slots
-                        </button>
+
+                        <!-- Button trigger modal -->
+                        <div class="row" style="display:flex; align-items:center; justify-content:center">
+                            <div class="col">
+                                <h5 class="card-title">Time Management</h5>
+                            </div>
+                            <div class="col"> <button type="button" style="float:right" class="btn btn-sm btn-primary"
+                                    data-bs-toggle="modal" id="addTimeBtn" data-bs-target="#timeModal">
+                                    Add Time
+                                </button></div>
+                        </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="timeModal" tabindex="-1" aria-labelledby="timeModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add Time-Slots</h5>
+                                        <h5 class="modal-title" id="timeModalLabel">Add Time</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="timeForm">
+                                            @csrf
+                                            <input type="hidden" id="time_id" name="time_id" value="">
+                                            <div class="mb-4">
+                                                <label for="time_value" class="form-label" style="font-weight:700;font-size:0.8em">Time</label>
+                                                <input type="time" class="form-control" id="time_value"
+                                                    name="time_value" placeholder="Enter the time name">
+                                                <span id="timeValueError" style="color:red;font-size:0.8em"></span><br>
+                                            </div>
 
-
-                                    </div>
-                                    <div class="mb-4">
-                                        {{-- <label for="dropdown" class="form-label">Choose a day:</label> --}}
-                                        <select class="form-select" id="dropdown">
-                                            <option selected>Choose a day:</option>
-                                            <option value="1">Moday</option>
-                                            <option value="2">Tuesdy</option>
-                                            <option value="3">Wednesday</option>
-                                            <option value="4">Thursday</option>
-                                            <option value="5">Friday</option>
-                                            <option value="6">saturday</option>
-                                            <option value="7">Sunday</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-4 form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox">
-                                        <label class="form-check-label" for="checkbox">Active/Not</label>
-                                    </div>
-                                   
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" id="saveTime"
+                                                    class="btn btn-primary submit">Create</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
 
                         <!-- Table with stripped rows -->
@@ -56,17 +58,22 @@
                                     <th>
                                         <b>Name</b>
                                     </th>
-                                    <th>Day</th>
-                                    <th>Active Or Not</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($bookings as $slots)
+                                @foreach ($times as $time)
                                     <tr>
-                                        <td>{{ $slots->day }}</td>
-                                        <td>{{ $slots->is_active }}</td>
-                                        <td><a href="" class="btn btn-warning">Edit</a>
-                                            <a href="" class="btn btn-danger">Delete</a></td>
+                                        <td>{{ \Carbon\Carbon::parse($time->time)->format('h:i A') }}</td>
+                                        <td><div class="form-check form-switch ">
+                                            <input class="form-check-input toggle-status" type="checkbox" data-id="{{ $time->id }}" {{ $time->is_active ? 'checked' : '' }} id="flexSwitchCheckChecked">
+
+                                          </div></td>
+                                        <td>
+                                            <a href="" class="btn btn-danger btn-sm delete"
+                                                data-id="{{ $time->id }}">Delete</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -79,4 +86,110 @@
             </div>
         </div>
     </section>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // Click add time btn
+
+            $('#addTimeBtn').click(function(e) {
+                e.preventDefault();
+                $('#updateTime').hide();
+                $('#timeForm')[0].reset();
+
+            });
+
+            // Create Time
+
+            $('#saveTime').click(function(e) {
+                e.preventDefault();
+                $('#updateTime').hide();
+
+                let time_value = $('#time_value').val();
+
+                // Validation
+
+                let timeValue = $('#time_value').val().trim();
+
+                if (timeValue.length == null || timeValue.length == undefined ) {
+                    $('#timeValueError').text('Enter a valid time.');
+                    return;
+                }
+
+                // AJAX request
+                $.ajax({
+                    url: '/time-add',
+                    method: "POST",
+                    data: {
+                        time_value: time_value,
+                    },
+                    success: function(response) {
+                        $('#timeModal').modal('hide');
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText); // Debugging
+                        alert('Error adding time!');
+                    }
+                });
+            });
+
+            // Fetch time record
+
+
+
+            // Update Time
+
+            $('.toggle-status').change(function () {
+            let id = $(this).data('id');
+            let status = $(this).prop('checked') ? 1 : 0;
+                console.log(id,status)
+            $.ajax({
+                url: "/time-update",
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id,
+                    status: status
+                },
+                success: function (response) {
+                    alert(response.message);
+                },
+                error: function (xhr) {
+                    alert('Error updating status');
+                }
+            });
+        });
+
+        });
+
+        // Delte Time
+
+        $(document).on('click', '.delete', function(event) {
+            event.preventDefault();
+            let id = $(this).data('id');
+
+            if (confirm('Are you sure you want to delete this time?')) {
+                $.ajax({
+                    url: `/time-delete/${id}`,
+                    method: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function() {
+                        location.reload();
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

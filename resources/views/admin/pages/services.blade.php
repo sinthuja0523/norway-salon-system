@@ -100,13 +100,12 @@
         </div>
     </section>
 
-    <!-- jQuery & AJAX -->
+    <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         $(document).ready(function() {
-            // Set CSRF token for all AJAX requests
-            $('#updateService').hide();
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -114,9 +113,12 @@
             });
 
             // Click add service btn
+
             $('#addServiceBtn').click(function(e) {
                 e.preventDefault();
+                $('#updateService').hide();
                 $('#serviceForm')[0].reset();
+
             });
 
             // Create Service
@@ -135,7 +137,6 @@
                 let serviceDescription = $('#service_description').val().trim();
                 let servicePrice = $('#service_price').val().trim();
 
-                // Client-side validation
                 if (serviceName.length < 3) {
                     $('#serviceNameError').text('Name must be at least 3 characters.');
                     return;
