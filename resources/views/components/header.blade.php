@@ -8,9 +8,9 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="index.html" class="nav-item nav-link active">Home</a>
-            <a href="#about" class="nav-item nav-link">About</a>
-            <a href="#service" class="nav-item nav-link">Service</a>
-            <div class="nav-item dropdown">
+            <a href="#about_section" class="nav-item nav-link">About</a>
+            <a href="#service_section" class="nav-item nav-link">Service</a>
+            {{-- <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu m-0">
                     <a href="price.html" class="dropdown-item">Pricing Plan</a>
@@ -19,8 +19,8 @@
                     <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                     <a href="404.html" class="dropdown-item">404 Page</a>
                 </div>
-            </div>
-            <a href="#contact" class="nav-item nav-link">Contact</a>
+            </div> --}}
+            <a href="#contact_section" class="nav-item nav-link">Contact</a>
         </div>
         <a href="#book_appointment" class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block">Appointment<i
                 class="fa fa-arrow-right ms-3"></i></a>

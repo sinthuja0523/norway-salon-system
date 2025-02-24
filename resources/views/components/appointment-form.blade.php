@@ -136,7 +136,7 @@
                     formData: formData,
                 },
                 success: function (response) {
-                    alert(response.message);
+                    // alert(response.message);
                     $('#appointmentForm')[0].reset(); // Reset form on success
                 },
                 error: function (xhr) {

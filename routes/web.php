@@ -71,8 +71,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/monthly-reports',[AdminController::class,'monthlyReportsView'])->name('monthlyreports-new');
     Route::get('/time-slots',[AdminController::class,'TimeSlotsView'])->name('timeslots-new');
 
-    Route::post('/approve',[AdminController::class,'approveAppointment']);
-    Route::post('/decline', [AdminController::class, 'declineAppointment']);
+    Route::post('/approve-appointment',[AdminController::class,'approveAppointment']);
+    Route::post('/decline-appointment', [AdminController::class, 'declineAppointment']);
 
     // Admin - Services routes
     Route::get('/services',[ServiceController::class,'index'])->name('services.view');

@@ -30,14 +30,10 @@
                                         <td>{{ $booking->booking_date }}</td>
                                         <td>{{ $booking->status }}</td>
                                         <td>
-                                            @if ($booking->status == 'pending')
-                                                <button class="btn btn-warning approve_btn"
-                                                    data-id="{{ $booking->id }}">Approve</button>
-                                                <a href="" data-id="{{ $booking->id }}" class="btn btn-danger decline_btn">Decline</a>
-                                            @else
-                                                <span class="badge bg-success">Approved</span>
-                                            @endif
-
+                                            <button class="btn btn-warning approve_btn"
+                                                data-id="{{ $booking->id }}">Approve</button>
+                                            <a href="" data-id="{{ $booking->id }}"
+                                                class="btn btn-danger decline_btn">Decline</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -63,10 +59,10 @@
                 event.preventDefault();
                 var appointment_id = $(this).data('id');
                 var button = $(this);
-                var row =button.closest('tr');
+                var row = button.closest('tr');
                 console.log(appointment_id)
                 $.ajax({
-                    url: '/approve',
+                    url: '/approve-appointment',
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -75,7 +71,8 @@
                     success: function(response) {
                         console.log("Response :", response.success)
                         if (response.success) {
-                            button.replaceWith('<span class="badge bg-success">Approved</span>');
+                            button.replaceWith(
+                            '<span class="badge bg-success">Approved</span>');
                             row.find('.decline_btn').hide();
                         }
 
@@ -87,10 +84,10 @@
                 event.preventDefault();
                 var appointment_id = $(this).data('id');
                 var button = $(this);
-                var row =button.closest('tr');
+                var row = button.closest('tr');
                 console.log(appointment_id)
                 $.ajax({
-                    url: '/decline',
+                    url: '/decline-appointment',
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',

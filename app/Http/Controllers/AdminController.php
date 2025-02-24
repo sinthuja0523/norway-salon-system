@@ -66,9 +66,9 @@ class AdminController extends Controller
     }
 
     public function declineAppointment(Request $request){
-        // \Log::info($request->all());
+        \Log::info($request->all());
         $data = Booking::find($request->appointment_id);
-        $data->status = "declined";
+        $data->status = "rejected";
         $data->save();
 
         return response()->json(['success'=>true]);

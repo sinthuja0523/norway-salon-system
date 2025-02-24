@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\BookingService;
 use Carbon\Carbon;
 
 class BookingController extends Controller
@@ -32,7 +33,7 @@ class BookingController extends Controller
         $dateTimeString = $date . ' ' . $timeSlot;
         $dateTime = Carbon::parse($dateTimeString);
 
-        // Storing
+        // Storing in bookings table
 
         $booking = new Booking();
         $booking->booking_date =  $dateTime;
@@ -42,6 +43,15 @@ class BookingController extends Controller
         $booking->customer_email = $formData['email'];
         $booking->is_registered_user = 0;
         $booking->save();
+
+        // Storing in bookings_services table
+
+        foreach ($formData['service_ids'] as $key => $new) {
+            $data = new BookingService();
+            $data->booking_id = $booking->id;
+            $data->service_id = $new;
+            $data->save();
+        }
 
 
     }
