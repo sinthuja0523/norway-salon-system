@@ -7,6 +7,12 @@ use App\Models\Booking;
 
 class BookingController extends Controller
 {
+    public function index(){
+        $services = \DB::table('services')->get();
+        $branches = \DB::table('branches')->get();
+        $time_slots = \DB::table('time_slots')->get();
+        return view('pages.home',compact('branches','services','time_slots'));
+    }
     public function store(Request $request){
 
         // Validation

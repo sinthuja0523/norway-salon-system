@@ -24,9 +24,8 @@ use App\Http\Controllers\TimeSlotController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/',  [BookingController::class , 'index']);
+
 Route::get('/about', function () {
     return view('pages.abouts');
 });
@@ -89,11 +88,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/branch-update/{id}', [BranchController::class, 'updateBranch'])->name('branches.update');
     Route::delete('/branch-delete/{id}', [BranchController::class, 'deleleBranch']);
 
-        // Admin - Time slots routes
-        Route::get('/time-slots',[TimeSlotController::class,'index'])->name('time.view');
-        Route::post('/time-add', [TimeSlotController::class, 'storeTime'])->name('time.store');
-        Route::post('/time-update', [TimeSlotController::class, 'updateTime'])->name('time.update');
-        Route::delete('/time-delete/{id}', [TimeSlotController::class, 'deleleTime']);
+    // Admin - Time slots routes
+    Route::get('/time-slots',[TimeSlotController::class,'index'])->name('time.view');
+    Route::post('/time-add', [TimeSlotController::class, 'storeTime'])->name('time.store');
+    Route::post('/time-update', [TimeSlotController::class, 'updateTime'])->name('time.update');
+    Route::delete('/time-delete/{id}', [TimeSlotController::class, 'deleleTime']);
 });
 
 require __DIR__.'/auth.php';

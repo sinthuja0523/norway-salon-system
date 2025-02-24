@@ -17,49 +17,41 @@
                                     <div class="form-floating">
                                         <select name="branch" class="form-control bg-transparent ctm_branch"
                                             id="branch">
-                                            <option value="">Branch1</option>
-                                            <option value="">Branch1</option>
-                                            <option value="">Branch1</option>
+                                            @foreach ($branches as $branch)
+                                                <option value="">{{ $branch->branch_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" name="service_id"
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Service 1
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"value="2" name="service_id"
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Service 2
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="3" name="service_id"
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                Service 3
-                                            </label>
-                                        </div>
+                                        @foreach ($services as $service)
+                                            <div class="form-check">
+                                                <input type="hidden" name="service_id">
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    name="service_id" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{ $service->service_name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="date" class="form-control bg-transparent" id="date" name="date"
-                                            placeholder="Your Name">
+                                        <input type="date" class="form-control bg-transparent" id="date"
+                                            name="date" placeholder="Your Name">
                                         <label for="date">Date</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="time" class="form-control bg-transparent" id="time" name="time"
-                                            placeholder="Your Name">
-                                        <label for="time">Time</label>
+                                        <select name="branch" class="form-control bg-transparent ctm_branch"
+                                            id="branch">
+                                            @foreach ($time_slots as $time_slot)
+                                                <option value="">{{ \Carbon\Carbon::parse($time_slot->time)->format('h:i A') }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <hr>
@@ -67,29 +59,29 @@
                                 <hr>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-transparent" id="name" name="name"
-                                            placeholder="Your Name">
+                                        <input type="text" class="form-control bg-transparent" id="name"
+                                            name="name" placeholder="Your Name">
                                         <label for="name">Your Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control bg-transparent" id="email" name="email"
-                                            placeholder="Your Email">
+                                        <input type="email" class="form-control bg-transparent" id="email"
+                                            name="email" placeholder="Your Email">
                                         <label for="email">Your Email</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-transparent" id="phone_number" name="phone_number"
-                                            placeholder="Your mobile number">
+                                        <input type="text" class="form-control bg-transparent" id="phone_number"
+                                            name="phone_number" placeholder="Your mobile number">
                                         <label for="phone_number">Your mobile number</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-transparent" id="address" name="address"
-                                            placeholder="Your address">
+                                        <input type="text" class="form-control bg-transparent" id="address"
+                                            name="address" placeholder="Your address">
                                         <label for="address">Your address</label>
                                     </div>
                                 </div>
@@ -113,3 +105,8 @@
         </div>
     </div>
 </div>
+
+
+ <!-- jQuery CDN -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
