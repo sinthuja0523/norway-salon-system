@@ -15,10 +15,10 @@ class AdminController extends Controller
 
         return view('admin.pages.new-appointments',compact('bookings'));
     }
-    public function newRejectedView ()
+    public function rejectedAppointmentsView ()
     {
-        $bookings = DB::table('bookings')->get();
-        return view('admin.pages.rejected-new',compact('bookings'));
+        $bookings = DB::table('bookings')->where('status','rejected')->get();
+        return view('admin.pages.rejected-appointments',compact('bookings'));
     }
     public function pastappointmentView()
     {
@@ -56,6 +56,10 @@ class AdminController extends Controller
 
     }
 
+    public function approvedAppointmentsView(){
+        $bookings = DB::table('bookings')->where('status','approved')->get();
+        return view('admin.pages.approved-appointments',compact('bookings'));
+    }
     public function approveAppointment(Request $request){
         // \Log::info($request->all());
         $data = Booking::find($request->appointment_id);

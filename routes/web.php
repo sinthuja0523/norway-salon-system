@@ -63,7 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/new-appointments',[AdminController::class,'newAppointmentsView'])->name('appointment.new');
-    Route::get('/rejected-appointments',[AdminController::class,'newRejectedView'])->name('rejected-new');
+    Route::get('/approved-appointments',[AdminController::class,'approvedAppointmentsView'])->name('rejected-new');
+    Route::get('/rejected-appointments',[AdminController::class,'rejectedAppointmentsView'])->name('rejected-new');
     Route::get('/past-appointments',[AdminController::class,'pastappointmentView'])->name('past-new');
     Route::get('/time-slots',[AdminController::class,'timeSlotsView'])->name('timeslots-new');
     Route::get('/dailyReports',[AdminController::class,'dailyReportsView'])->name('dailyreports-new');

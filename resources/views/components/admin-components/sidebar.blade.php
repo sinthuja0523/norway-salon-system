@@ -18,6 +18,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/approved-appointments">
+                        <i class="bi bi-circle"></i><span>Approved appointments</span>
+                    </a>
+                </li>
+                <li>
                     <a href="/rejected-appointments">
                         <i class="bi bi-circle"></i><span>Rejected appointments</span>
                     </a>
