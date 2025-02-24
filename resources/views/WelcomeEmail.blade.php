@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Hi</h1>
-    <p>Chellammaaa</p>
+    <p>Good Mornig! Have a good day</p>
     <p>Thank you</p>
     <p>Regards</p>
     <p>Mailstrip</p>

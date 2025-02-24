@@ -14,7 +14,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <b>N</b>ame
+                                        <b>Name</b>
                                     </th>
                                     <th>Address</th>
                                     <th data-type="date" data-format="YYYY/DD/MM">Date</th>

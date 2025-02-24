@@ -69,9 +69,9 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <b>Name</b>
+                                        <b>Branch Name</b>
                                     </th>
-                                    <th>Branch Name</th>
+                                    <th>Branch Location</th>
                                     <th>Description</th>
                                     <th>Price</th>
                                 </tr>
