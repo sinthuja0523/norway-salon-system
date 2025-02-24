@@ -7,6 +7,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TimeSlotController;
+use App\Http\Controllers\ServiceController;
 
 
 /*
@@ -62,7 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/new-appointments',[AdminController::class,'newAppointmentsView'])->name('appointment.new');
     Route::get('/rejected-appointments',[AdminController::class,'newRejectedView'])->name('rejected-new');
     Route::get('/past-appointments',[AdminController::class,'pastappointmentView'])->name('past-new');
-    Route::get('/admindashboard',[AdminController::class,'admindashboardView'])->name('admindashboard-new');
     Route::get('/time-slots',[AdminController::class,'timeSlotsView'])->name('timeslots-new');
     Route::get('/dailyReports',[AdminController::class,'dailyReportsView'])->name('dailyreports-new');
     Route::get('/weekly-reports',[AdminController::class,'weeklyReportsView'])->name('weeklyreports-new');
@@ -73,6 +73,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/approve',[AdminController::class,'approveAppointment']);
     Route::post('/decline', [AdminController::class, 'declineAppointment']);
 
+    // Admin - services routes
+    Route::get('/services',[ServiceController::class,'index'])->name('services.view');
+    Route::post('/service-add', [ServiceController::class, 'storeService'])->name('services.store');
+    Route::get('/service-edit/{id}', [ServiceController::class, 'editService'])->name('services.edit');
+    Route::post('/service-update/{id}', [ServiceController::class, 'updateService'])->name('services.update');
+    Route::delete('/service-delete/{id}', [ServiceController::class, 'deleleService']);
 });
 
 require __DIR__.'/auth.php';

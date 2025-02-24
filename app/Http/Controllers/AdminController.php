@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Service;
 use DB;
 
 class AdminController extends Controller
@@ -25,12 +26,7 @@ class AdminController extends Controller
         return view('admin.pages.past-appointments',compact('bookings'));
 
     }
-    public function admindashboardView()
-    {
-        $bookings = DB::table('services')->get();
-        // dd($bookings);
-        return view('admin.pages.admindashboard',compact('bookings'));
-    }
+
     public function timeSlotsView()
     {
         $bookings = DB::table('timeslots')->get();
@@ -77,6 +73,8 @@ class AdminController extends Controller
 
         return response()->json(['success'=>true]);
     }
+
+
 
 }
 

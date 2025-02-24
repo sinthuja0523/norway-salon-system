@@ -30,7 +30,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/admindashboard">
+            <a class="nav-link collapsed" href="/services">
                 <i class="bi bi-person"></i>
                 <span>Services</span>
             </a>
