@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -20,12 +21,25 @@ class BookingController extends Controller
         // $messages = [];
         // $validator = Validator::make($request->all(),$rules,$messages);
         // dd($request->all());
+        \Log::info('Store fcuntion loaded');
+        \Log::info($request->all());
+        $formData = $request->input('formData');
+
+        // Date
+
+        $date = $formData['date'];
+        $timeSlot = $formData['time_slot'];
+        $dateTimeString = $date . ' ' . $timeSlot;
+        $dateTime = Carbon::parse($dateTimeString);
+
+        // Storing
+
         $booking = new Booking();
-        $booking->booking_date = now();
-        $booking->customer_address = $request->address;
-        $booking->customer_phone_number = $request->phone_number;
-        $booking->customer_name = $request->name;
-        $booking->customer_email = $request->email;
+        $booking->booking_date =  $dateTime;
+        $booking->customer_address = $formData['address'];
+        $booking->customer_phone_number = $formData['phone_number'];
+        $booking->customer_name = $formData['name'];
+        $booking->customer_email = $formData['email'];
         $booking->is_registered_user = 0;
         $booking->save();
 

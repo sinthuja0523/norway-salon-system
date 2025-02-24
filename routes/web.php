@@ -45,7 +45,7 @@ Route::get('/contact', function () {
 
 // Route::get('/appoint' , [AppointController::class,'appoint']);
 // Route::get('/book', [AppointController::class,'create']);
-Route::post('/book', [BookingController::class,'store'])->name('book.appointment');
+Route::post('/book-appointment', [BookingController::class,'store'])->name('book.appointment');
 
 
 
